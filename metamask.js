@@ -25,17 +25,19 @@ async function getMetamaskAddress() {
 
 async function getNFTsByWalletAddressWithCursor(address, cursor) {
   const contract_addresses_delim = zancanContractsETH.join(",");
-  const response = await fetch(
-    `https://api.simplehash.com/api/v0/nfts/owners?chains=ethereum&wallet_addresses=${address}&contract_addresses=${contract_addresses_delim}&cursor=${cursor}&limit=50`,
-    {
-      headers: {
-        accept: "application/json",
-        "X-API-KEY": atob(
-          "YXJ0dGVjaG5vbG9nX3NrXzNlMGUzMDBjLWE4ODMtNDNlZS1iZjUyLTMzZGE1YWI3MGU1Ml9uZHpseGZ5Y3Foa3MzOTVv"
-        ),
-      },
-    }
-  );
+  let url = `https://api.simplehash.com/api/v0/nfts/owners?chains=ethereum&wallet_addresses=${address}&contract_addresses=${contract_addresses_delim}&limit=50`;
+  if (cursor != "" && cursor != null) {
+    url = cursor;
+  }
+
+  const response = await fetch(url, {
+    headers: {
+      accept: "application/json",
+      "X-API-KEY": atob(
+        "YXJ0dGVjaG5vbG9nX3NrXzNlMGUzMDBjLWE4ODMtNDNlZS1iZjUyLTMzZGE1YWI3MGU1Ml9uZHpseGZ5Y3Foa3MzOTVv"
+      ),
+    },
+  });
   const data = await response.json();
   return data;
 }
@@ -44,7 +46,7 @@ async function getNFTsByWalletAddress(address) {
   let nfts = [];
   let cursor = "";
   while (cursor != null) {
-    const data = await getNFTsByWalletAddressWithCursor(address);
+    const data = await getNFTsByWalletAddressWithCursor(address, cursor);
     nfts.push(...data.nfts);
     cursor = data.next;
   }
@@ -64,8 +66,9 @@ function constructMetadata(nftData) {
 
 jQuery(function () {
   $("#login-metamask").on("click", async function () {
-    // const address = await getMetamaskAddress();
-    const address = "0x6E92b35679A31006b46A72BA8B5275310F4F718b";
+    const address = await getMetamaskAddress();
+    // uncomment this wallet to test
+    // const address = "0x04490fB053a8Ff110bea35F22D955C0092aAE5f8";
 
     if (address == undefined) {
       console.log("metamask address could not been obtained");
