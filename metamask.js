@@ -68,9 +68,9 @@ function constructMetadata(nftData) {
 
 jQuery(function () {
   $("#login-metamask").on("click", async function () {
-    // const address = await getMetamaskAddress();
+    const address = await getMetamaskAddress();
     // uncomment this wallet to test
-    const address = "0xc6893eeb690596e44f6c8668990a5cD7B8B1cEdb";
+    // const address = "0xc6893eeb690596e44f6c8668990a5cD7B8B1cEdb";
 
     if (address == undefined) {
       console.log("metamask address could not been obtained");
@@ -80,6 +80,5 @@ jQuery(function () {
     let nfts = await getNFTsByWalletAddress(address);
     let nftMetada = nfts.map(constructMetadata);
     console.log(nftMetada);
-    console.log(nfts);
   });
 });
