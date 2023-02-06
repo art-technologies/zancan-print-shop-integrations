@@ -61,14 +61,16 @@ function constructMetadata(nftData) {
     hash: nftData?.extra_metadata?.hash || "",
     generator: nftData?.extra_metadata?.animation_original_url || "",
     name: nftData.name,
+    artworkNumber: (nftData.name.match(/\d+/g) || "").join(""),
+    editionId: nftData.token_id,
   };
 }
 
 jQuery(function () {
   $("#login-metamask").on("click", async function () {
-    const address = await getMetamaskAddress();
+    // const address = await getMetamaskAddress();
     // uncomment this wallet to test
-    // const address = "0x04490fB053a8Ff110bea35F22D955C0092aAE5f8";
+    const address = "0xc6893eeb690596e44f6c8668990a5cD7B8B1cEdb";
 
     if (address == undefined) {
       console.log("metamask address could not been obtained");
@@ -78,5 +80,6 @@ jQuery(function () {
     let nfts = await getNFTsByWalletAddress(address);
     let nftMetada = nfts.map(constructMetadata);
     console.log(nftMetada);
+    console.log(nfts);
   });
 });
