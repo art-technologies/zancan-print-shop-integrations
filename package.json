@@ -1,0 +1,21 @@
+{
+  "name": "zancan-print-shop-integrations",
+  "version": "1.0.0",
+  "source": "src/lib/ethereum.js",
+  "main": "dist/browser.js",
+  "repository": "git@github.com:art-technologies/zancan-print-shop-integrations.git",
+  "author": "sergyperov <sergyperov@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "npx webpack"
+  },
+  "dependencies": {
+    "@wagmi/core": "^0.9.5",
+    "@web3modal/ethereum": "^2.1.1",
+    "@web3modal/html": "^2.1.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
