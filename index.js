@@ -77,7 +77,7 @@ function connectWallet() {
  */
 
 const verseAuthInstance = new window.VerseAuth({
-  verseHost: "https://verse-webapp-git-signin-with-verse-support-at-verse.vercel.app",
+  verseHost: "https://staging.dev.verse.works",
   verseApiHost: "https://staging.dev.verse.works",
 });
 
