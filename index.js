@@ -76,10 +76,7 @@ function connectWallet() {
  * ============= VERSE WEBSITE INTEGRATION BEGIN =============
  */
 
-const verseAuthInstance = new window.VerseAuth({
-  verseHost: "https://staging.dev.verse.works",
-  verseApiHost: "https://staging.dev.verse.works",
-});
+const verseAuthInstance = new window.VerseAuth();
 
 const zancanArtworksVerse = [
   // Landscape with Carbon Offset, 2022
