@@ -14,6 +14,7 @@ const zancanContractsETH = [
   "0x850d754a640f640b8d9844518f584ee131a57c9d",
 ];
 
+// requests NFTs by chunks
 async function getNFTsByWalletAddressWithCursor(address, cursor) {
   const contract_addresses_delim = zancanContractsETH.join(",");
   let url = `https://api.simplehash.com/api/v0/nfts/owners?chains=ethereum&wallet_addresses=${address}&contract_addresses=${contract_addresses_delim}&limit=50`;
@@ -33,6 +34,7 @@ async function getNFTsByWalletAddressWithCursor(address, cursor) {
   return data;
 }
 
+// requests all NFTs for a wallet address
 async function getNFTsByWalletAddress(address) {
   let nfts = [];
   let cursor = "";
@@ -44,6 +46,7 @@ async function getNFTsByWalletAddress(address) {
   return nfts;
 }
 
+// converts NFT data from SimpleHash to our metadata format
 function constructMetadataFromEth(nftData) {
   return {
     collection: nftData.collection.name,
@@ -57,6 +60,7 @@ function constructMetadataFromEth(nftData) {
   };
 }
 
+// propting user to connect his wallet using `web3modal`
 function connectWallet() {
   return new Promise((resolve) => {
     ethereumClient.watchAccount((account) => {
@@ -89,6 +93,7 @@ const zancanArtworksVerse = [
   "be5b9a9d-90c1-4675-a61b-560de10ce366",
 ];
 
+// converts NFT data from Verse to our metadata format
 function getZancanArtworks(editions) {
   return editions
       .filter((edition) => zancanArtworksVerse.includes(edition.artwork.id))
