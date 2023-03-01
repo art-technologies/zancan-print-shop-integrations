@@ -93,7 +93,7 @@ const zancanArtworksVerse = [
   "be5b9a9d-90c1-4675-a61b-560de10ce366",
 ];
 
-// converts NFT data from Verse to our metadata format
+// filter out editions that are not from Zancan artworks
 function getZancanArtworks(editions) {
   return editions
       .filter((edition) => zancanArtworksVerse.includes(edition.artwork.id))
