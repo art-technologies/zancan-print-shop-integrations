@@ -157,4 +157,23 @@ jQuery(function () {
     let verseMetadata = getZancanArtworks(result);
     renderArtworks(verseMetadata);
   });
+
+  const payWithEthBtn = $("#pay-with-eth")
+  payWithEthBtn.on("click", async function () {
+    await connectWallet()
+    const recipientAddress = "0x86Fd246c2c306d7ECf52338248FAaDA63F8341fc"; // replace with actual recipient address
+    const amountInWei = viem.parseEther('0.001');
+
+    try {
+      const { hash } = await wagmi.sendTransaction({
+        request: {
+          to: recipientAddress,
+          value: amountInWei,
+        },
+      })
+      console.log("transaction hash", hash)
+    } catch (err) {
+      console.error(err);
+    }
+  })
 });
