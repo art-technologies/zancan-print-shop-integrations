@@ -1,4 +1,6 @@
 import { configureChains, createClient } from '@wagmi/core'
+import * as wagmi from '@wagmi/core'
+import * as viem from "viem"
 import { mainnet } from '@wagmi/core/chains'
 import { EthereumClient, modalConnectors, walletConnectProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/html'
@@ -26,3 +28,5 @@ const web3Modal = new Web3Modal(
 window.wagmiClient = wagmiClient
 window.ethereumClient = ethereumClient
 window.web3Modal = web3Modal
+window.wagmi = wagmi
+window.viem = viem
