@@ -63,6 +63,12 @@ function constructMetadataFromEth(nftData) {
 // propting user to connect his wallet using `web3modal`
 function connectWallet() {
   return new Promise((resolve) => {
+    const currentAccount = ethereumClient.getAccount()
+    if (currentAccount.isConnected) {
+        resolve(currentAccount.address)
+        return
+    }
+
     ethereumClient.watchAccount((account) => {
       if (account?.status === "connected") {
         resolve(account.address)
